@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('search');
 });
+
+Route::get('search', 'SearchController@search')->name('search');
+Route::get('result', 'SearchController@result')->name('result');
