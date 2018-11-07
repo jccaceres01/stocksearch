@@ -8,5 +8,5 @@ class ExistenciaBodegas extends Model
 {
   protected $table = 'SOCOCO.EXISTENCIA_BODEGA';
 
-  
+
 }
