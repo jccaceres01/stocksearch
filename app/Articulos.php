@@ -52,6 +52,13 @@ class Articulos extends Model
   }
 
   /**
+   * Original/Aftermaker Clasificacion relationship
+   */
+  public function original() {
+    return $this->hasOne('App\Clasificaciones', 'CLASIFICACION',
+      'CLASIFICACION_2');
+  }
+  /**
    * Search Query Scope
    */
   // public function scopeSearch($query, $criteria) {

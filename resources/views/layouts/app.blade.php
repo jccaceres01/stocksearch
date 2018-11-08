@@ -8,23 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     @yield('head')
 
     <title>Buscador</title>
-
-    <style media="screen">
-      .logo {
-        width: 45px;
-        height: 45px;
-        background-color: rgb(255, 255, 255);
-        border-style: none;
-        margin: 0px;
-        padding: 0px;
-        border-radius:100%;
-      }
-    </style>
   </head>
-  <body>
+  <body @yield('body-properties')>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

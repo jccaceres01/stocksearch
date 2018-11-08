@@ -4,16 +4,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3> Resultados de busqueda: <span class="badge badge-secondary">{{ $articulos->total() }}</span></h3>
+      <h3 class="text-dark"> Resultados de busqueda: <span class="badge badge-warning">{{ $articulos->total() }}</span></h3>
     </div>
     <div class="col-md-6">
       <div class="">
         <form class="" action="{{ route('result') }}" method="GET">
           @csrf
           <div class="input-group">
-            <input type="text" name="criteria" required class="form-control" placeholder="Buscar por nombre o número de parte">
+            <input type="text" name="criteria" required class="form-control border border-warning" placeholder="Buscar por nombre o número de parte">
             <div class="input-group-append">
-              <button type="" class="btn btn-secondary"><i class="fas fa-search"></i> Buscar</button>
+              <button type="" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
             </div>
           </div>
         </form>
@@ -29,7 +29,7 @@
       @foreach($articulos as $art)
       <div class="row">
         <div class="col-md-1">
-          <span class="badge badge-secondary" style="font-size:20px; font-weight:bold;">{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}</span>
+          <span class="badge badge-warning" style="font-size:20px; font-weight:bold;">{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}</span>
         </div>
         <div class="col-md-11">
           <div class="card border border-dark">
@@ -51,10 +51,27 @@
                 <div class="col-md-6">
                   <table>
                     <tr>
-                      <td><strong>Disponible:</strong> <span class="badge badge-success"> {{ $art->existenciaBodega->sum('CANT_DISPONIBLE') }}</span></td>
+                      <td><strong>Disponible:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_DISPONIBLE') }}</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Reservada:</strong> <span class="badge badge-warning"> {{ $art->existenciaBodega->sum('CANT_RESERVADA') }}</span></td>
+                      <td><strong>Reservada:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_RESERVADA') }}</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Original: </strong>
+                        @if(!empty($art->original))
+                          @switch($art->CLASIFICACION_2)
+                            @case('02-01')
+                              <i class="fas fa-check-circle text-success" title="Original" data-toggle="tooltip" data-placement="top"></i>
+                              @break
+                            @case('02-02')
+                              <i class="fas fa-times-circle text-danger" title="AfterMaker" data-toggle="tooltip" data-placement="top"></i>
+                              @break
+                            @default
+                              No Definido
+                          @endswitch
+                        @endif
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -107,7 +124,13 @@
                         <td>{{ $alt->ARTICULO }}</td>
                         <td>{{ $alt->partNumber }}</td>
                         <td>{{ $alt->partName }}</td>
-                        <td><a href="#">Consultar</a></td>
+                        <td>
+                          <form class="" action="{{ route('result') }}" method="GET">
+                            @csrf
+                            <input type="hidden" name="criteria" value="{{ $alt->partNumber }}">
+                            <button type="submit" class="btn btn-secondary btn-sm">{{ $alt->existenciaBodega->sum('CANT_DISPONIBLE') }} Consultar</button>
+                          </form>
+                        </td>
                       </tr>
                       @endforeach
                       @endif
