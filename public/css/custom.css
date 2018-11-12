@@ -9,10 +9,10 @@
 }
 
 .body-search {
-  background: url(/img/background.jpg);
+  background-image: url(/img/background.jpg);
   background-color: rgb(31, 31, 31);
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 
 .custom-search {
