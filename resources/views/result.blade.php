@@ -33,32 +33,32 @@
         </div>
         <div class="col-md-11">
           <div class="card border border-dark">
-            <div class="card-header">
+            <div class="card-header bg-dark text-white">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <table>
                     <tr>
-                      <td><strong>Código Softland: </strong> {{ $art->ARTICULO }}</td>
+                      <td><strong class="text-warning">Código Softland: </strong> {{ $art->ARTICULO }}</td>
                     </tr>
                     <tr>
-                      <td><strong>Número de Parte: </strong> {{ $art->partNumber }}</td>
+                      <td><strong class="text-warning">Número de Parte: </strong> {{ $art->partNumber }}</td>
                     </tr>
                     <tr>
-                      <td><strong>Nombre: </strong> {{ $art->partName }}</td>
+                      <td><strong class="text-warning">Nombre: </strong> {{ $art->partName }}</td>
                     </tr>
                   </table>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <table>
                     <tr>
-                      <td><strong>Disponible:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_DISPONIBLE') }}</span></td>
+                      <td><strong class="text-warning">Disponible:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_DISPONIBLE') }}</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Reservada:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_RESERVADA') }}</span></td>
+                      <td><strong class="text-warning">Reservada:</strong> <span class="badge badge-secondary"> {{ $art->existenciaBodega->sum('CANT_RESERVADA') }}</span></td>
                     </tr>
                     <tr>
                       <td>
-                        <strong>Original: </strong>
+                        <strong class="text-warning">Original: </strong>
                         @if(!empty($art->original))
                           @switch($art->CLASIFICACION_2)
                             @case('02-01')
@@ -74,6 +74,12 @@
                       </td>
                     </tr>
                   </table>
+                </div>
+                <div class="col-md-2">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-warning" onclick="setForm({{ json_encode($art->ARTICULO) }})">
+                    Historial <i class="fas fa-angle-right"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -155,4 +161,68 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('post-body')
+<!-- Modal for historical items -->
+<div class="modal fade" id="article_historical" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-warning">
+        <h5 class="modal-title" id="#">Consultar Historial de Repuesto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form" action="{{ route('article.rotation') }}" method="post" target="_blank">
+        @csrf
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- start_date -->
+              <div class="form-group">
+                <label for="start_date">Fecha Inicial</label>
+                <input type="date" class="form-control" name="start_date" placeholder="Fecha Inicial" required>
+              </div>
+
+              <!-- end_date -->
+              <div class="form-group">
+                <label for="end_date">Fecha Final</label>
+                <input type="date" class="form-control" name="end_date" placeholder="Fecha Final" required>
+              </div>
+
+              <!-- code -->
+              <div class="form-group">
+                <label for="code">Código</label>
+                <input type="text" class="form-control" name="code" placeholder="Código" required>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-warning">Ver <i class="fas fa-search"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal for historical items -->
+@endsection
+
+@section('post-script')
+<script type="text/javascript">
+  function setForm(articulo) {
+    var startDate = document.querySelector('input[name="start_date"]')
+    var endDate = document.querySelector('input[name="end_date"]')
+    var code = document.querySelector('input[name="code"]')
+
+    startDate.value = Date.now()
+    endDate.value = Date.now()
+    code.value = articulo
+
+    $('#article_historical').modal('show')
+  }
+</script>
 @endsection

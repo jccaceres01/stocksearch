@@ -38,7 +38,6 @@
     <br>
 
     @yield('content')
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('/js/jquery.js') }}"></script>
@@ -69,4 +68,5 @@
     </script>
     @yield('post-script')
   </body>
+  @yield('post-body')
 </html>

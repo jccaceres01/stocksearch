@@ -58,6 +58,14 @@ class Articulos extends Model
     return $this->hasOne('App\Clasificaciones', 'CLASIFICACION',
       'CLASIFICACION_2');
   }
+
+  /**
+   * Transaccion_inv relacion 1:m
+   */
+  public function transaccionInv() {
+    return $this->hasMany('App\TransaccionInv', 'ARTICULO', 'ARTICULO');
+  }
+
   /**
    * Search Query Scope
    */

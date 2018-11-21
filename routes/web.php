@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('search');
+  return redirect()->route('search');
 });
 
 Route::get('search', 'SearchController@search')->name('search');
 Route::get('result', 'SearchController@result')->name('result');
+Route::post('rotation', 'SearchController@rotation')->name('article.rotation');
