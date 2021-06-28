@@ -23,6 +23,16 @@
   <div class="row">
     <div class="col-md-12">
       <hr>
+      @if ($errors->count() > 0)
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        @foreach($errors->all() as $er)
+        <p>* {{ $er }}</p>
+        @endforeach
+      </div>
+      @endif
       @if($articulos->total() > 100 )
       <h5 class="text-center text-danger">Se obtuvieron más de 100 resultados. Para reducir la cantidad mostrada, use un número de parte en vez de una descripción.</h5>
       @endif
@@ -83,65 +93,105 @@
                 </div>
               </div>
             </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <h5>Localizaciones:</h5>
-                  <hr>
-                  <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <td><strong>Bodega</strong></td>
-                        <td><strong>Localización</strong></td>
-                        <td><strong>Disponible</strong></td>
-                        <td><strong>Reservada</strong></td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @if(!empty($art->existenciaLote))
-                      @foreach($art->existenciaLote as $el)
-                      <tr>
-                        <td>{{ $el->BODEGA }} ({{ $el->storage->NOMBRE }})</td>
-                        <td>{{ $el->LOCALIZACION }}</td>
-                        <td>{{ $el->CANT_DISPONIBLE }}</td>
-                        <td>{{ $el->CANT_RESERVADA }}</td>
-                      </tr>
-                      @endforeach
-                      @endif
-                    </tbody>
-                  </table>
+            <div class="card-body p-0 m-0">
+              <ul class="nav nav-tabs" id="tabbed1" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1-{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}" role="tab" aria-controls="tab1" aria-selected="true"><strong>Localizaciones</strong></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2-{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}" role="tab" aria-controls="tab2" aria-selected="false"><strong>Alternos / Cambios</strong></a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tab1-{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}" role="tabpanel" aria-labelledby="home-tab">
+                  <!-- Loalizaciones content -->
+                  <div class="row">
+                    <div class="col-sm-12">
+
+                       <table class="table table-striped table-bordered table-hover">
+                         <thead>
+                           <tr>
+                             <td><strong>Bodega</strong></td>
+                             <td><strong>Localización</strong></td>
+                             <td><strong>Disponible</strong></td>
+                             <td><strong>Reservada</strong></td>
+                             <td><strong><i class="fas fa-cart"></i> Añadir al Carrito</strong></td>
+                           </tr>
+                         </thead>
+                         <tbody>
+                           @if(!empty($art->existenciaLote))
+                           @foreach($art->existenciaLote as $el)
+                           <tr>
+                             <td>{{ $el->BODEGA }} ({{ $el->storage->NOMBRE }})</td>
+                             <td>{{ $el->LOCALIZACION }}</td>
+                             <td>{{ $el->CANT_DISPONIBLE }}</td>
+                             <td>{{ $el->CANT_RESERVADA }}</td>
+                             <td>
+                               <form class="form d-inline" action="{{ route('carrito.store') }}" method="post">
+                                 <div class="row">
+                                   <div class="col-sm-6">
+                                     @csrf
+
+                                     <!-- Hidden info for each form -->
+                                     <input type="hidden" name="articulo_id" value="{{ $art->ARTICULO }}">
+                                     <input type="hidden" name="bodega_id" value="{{ $el->BODEGA }}">
+                                     <input type="hidden" name="localizacion" value="{{ $el->LOCALIZACION }}">
+                                     <input type="hidden" name="original" value="{{ ($art->CLASIFICACION_2 == '02-01') ? 1 : 0 }}">
+
+                                    <input type="number" steps="0.1" max="{{ $el->CANT_DISPONIBLE }}" min="1" class="d-inline form-control form-control-sm" name="cantidad" required>
+                                   </div>
+                                   <div class="col-sm-6">
+                                     <div class="btn-group" role="group">
+                                       <button type="reset" class="btn btn-secondary btn-sm" title="Limpiar"><i class="fas fa-retweet"></i> </button>
+                                       <button type="submit" class=" d-inline btn btn-secondary btn-sm" title="Añadir al carrito"><i class="fas fa-shopping-cart"></i> </button>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </form>
+                             </td>
+                           </tr>
+                           @endforeach
+                           @endif
+                         </tbody>
+                       </table>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <h5>Alternos / Cambios:</h5>
-                  <hr>
-                  <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><strong>Cod. Softland</strong></th>
-                        <th><strong>No. Parte</strong></th>
-                        <th><strong>Nombre</strong></th>
-                        <th><strong><i class="fas fa-eye"></i></strong></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @if (!empty($art->alternos))
-                      @foreach($art->alternos as $alt)
-                      <tr>
-                        <td>{{ $alt->ARTICULO }}</td>
-                        <td>{{ $alt->partNumber }}</td>
-                        <td>{{ $alt->partName }}</td>
-                        <td>
-                          <form class="" action="{{ route('result') }}" method="GET">
-                            @csrf
-                            <input type="hidden" name="criteria" value="{{ $alt->partNumber }}">
-                            <button type="submit" class="btn btn-secondary btn-sm">{{ $alt->existenciaBodega->sum('CANT_DISPONIBLE') }} Consultar</button>
-                          </form>
-                        </td>
-                      </tr>
-                      @endforeach
-                      @endif
-                    </tbody>
-                  </table>
+
+                <div class="tab-pane fade" id="tab2-{{ ($articulos->currentpage()-1) * $articulos->perpage() + $loop->index + 1 }}" role="tabpanel" aria-labelledby="profile-tab">
+                  <!-- Alternos content -->
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th><strong>Cod. Softland</strong></th>
+                            <th><strong>No. Parte</strong></th>
+                            <th><strong>Nombre</strong></th>
+                            <th><strong><i class="fas fa-eye"></i></strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @if (!empty($art->alternos))
+                          @foreach($art->alternos as $alt)
+                          <tr>
+                            <td>{{ $alt->ARTICULO }}</td>
+                            <td>{{ $alt->partNumber }}</td>
+                            <td>{{ $alt->partName }}</td>
+                            <td>
+                              <form class="" action="{{ route('result') }}" method="GET">
+                                @csrf
+                                <input type="hidden" name="criteria" value="{{ $alt->partNumber }}">
+                                <button type="submit" class="btn btn-secondary btn-sm">{{ $alt->existenciaBodega->sum('CANT_DISPONIBLE') }} Consultar</button>
+                              </form>
+                            </td>
+                          </tr>
+                          @endforeach
+                          @endif
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

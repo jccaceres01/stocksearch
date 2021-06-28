@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clasificaciones extends Model
 {
+  protected $conection = 'sqlsrv';
   protected $table = 'SOCOCO.CLASIFICACION';
   public $incrementing = false;
   public $keyType = 'varchar';

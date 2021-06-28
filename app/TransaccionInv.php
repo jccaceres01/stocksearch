@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransaccionInv extends Model
 {
+  public $connection = 'sqlsrv';
+
   protected $table = 'SOCOCO.TRANSACCION_INV';
 
   /**

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuditTransInv extends Model
 {
+  protected $connection = 'sqlsrv';
+
   protected $table = 'SOCOCO.AUDIT_TRANS_INV';
 
   /**

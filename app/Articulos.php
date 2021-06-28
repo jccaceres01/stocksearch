@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Articulos extends Model
 {
+  protected $connection = 'sqlsrv';
   protected $table = 'SOCOCO.ARTICULO';
 
   public $incrementing = false;

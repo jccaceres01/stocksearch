@@ -8,6 +8,12 @@ use App\Articulos;
 class SearchController extends Controller
 {
   /**
+   * Constructor
+   */
+  public function __construct() {
+    $this->middleware('auth');
+  }
+  /**
    * Return search view
    */
   public function search() {

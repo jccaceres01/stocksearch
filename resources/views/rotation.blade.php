@@ -8,9 +8,9 @@
         <div class="card-header bg-dark text-white">
           <h4>Historial de Movimientos, respuesto: <small>{{ $articulo->partName }} ({{ $articulo->partNumber }})</small> </h4>
         </div>
-        <div class="card-body">
-          <table class="table table-striled table-bordered table-hover">
-            <thead>
+        <div class="card-body p-0 m-0">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="bg-dark text-light">
               <tr>
                 <th>Bodega</th>
                 <th>Localización</th>
