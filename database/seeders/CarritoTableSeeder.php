@@ -1,9 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Carrito;
-use App\ExistenciaLotes;
-use App\User;
+use App\Models\Carrito;
+use App\Models\ExistenciaLotes;
+use App\Models\User;
 
 class CarritoTableSeeder extends Seeder
 {

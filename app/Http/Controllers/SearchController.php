@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Articulos;
+use App\Models\Articulos;
 
 class SearchController extends Controller
 {
@@ -11,7 +11,7 @@ class SearchController extends Controller
    * Constructor
    */
   public function __construct() {
-    $this->middleware('auth');
+    // $this->middleware('auth');
   }
   /**
    * Return search view

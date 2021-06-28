@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Pedido;
-use App\User;
+use App\Models\Pedido;
+use App\Models\User;
 use Faker\Factory as Faker;
 
 class PedidoTableSeeder extends Seeder

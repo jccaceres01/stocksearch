@@ -1,9 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\PedidoDetalle;
-use App\Pedido;
-use App\ExistenciaLotes;
+use App\Models\PedidoDetalle;
+use App\Models\Pedido;
+use App\Models\ExistenciaLotes;
 
 class PedidoDetalleTableSeeder extends Seeder
 {

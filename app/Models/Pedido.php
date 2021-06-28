@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,35 +28,35 @@ class Pedido extends Model
    * pedido_detalle relationship
    */
   public function detalle() {
-    return $this->hasMany('App\PedidoDetalle', 'pedido_id', 'id');
+    return $this->hasMany('App\Models\PedidoDetalle', 'pedido_id', 'id');
   }
 
   /**
    * User inverse relationship
    */
   public function usuario() {
-    return $this->belongsTo('App\User', 'user_id', 'id');
+    return $this->belongsTo('App\Models\User', 'user_id', 'id');
   }
 
   /**
    * User inverse relationship (Usuario de aprovacion)
    */
   public function usuarioAutorizacion() {
-    return $this->belongsTo('App\User', 'usuario_autorizacion', 'id');
+    return $this->belongsTo('App\Models\User', 'usuario_autorizacion', 'id');
   }
 
   /**
    * User inverse relationship (Usuario de entrega)
    */
   public function usuarioEntrega() {
-    return $this->belongsTo('App\User', 'entregado_por', 'id');
+    return $this->belongsTo('App\Models\User', 'entregado_por', 'id');
   }
 
   /**
    * User inverse relationship (Usuario de entrega)
    */
   public function usuarioRecepcion() {
-    return $this->belongsTo('App\User', 'recivido_por', 'id');
+    return $this->belongsTo('App\Models\User', 'recivido_por', 'id');
   }
 
 

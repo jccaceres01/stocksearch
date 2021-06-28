@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,13 +35,13 @@ class Carrito extends Model
    * Carrito-Articulo relationship
    */
   public function articulo() {
-    return $this->hasOne('App\Articulos', 'ARTICULO', 'articulo_id');
+    return $this->hasOne('App\Models\Articulos', 'ARTICULO', 'articulo_id');
   }
 
   /**
    * Carrito - Bodega relationship
    */
   public function bodega() {
-    return $this->hasOne('App\Bodegas', 'BODEGA', 'bodega_id');
+    return $this->hasOne('App\Models\Bodegas', 'BODEGA', 'bodega_id');
   }
 }

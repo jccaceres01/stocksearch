@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pedido;
+use App\Models\Pedido;
 
 class JsonDatasourceController extends Controller
 {

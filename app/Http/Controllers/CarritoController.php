@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarritoRequest;
 
-use App\User;
-use App\Carrito;
+use App\Models\User;
+use App\Models\Carrito;
 
 class CarritoController extends Controller
 {

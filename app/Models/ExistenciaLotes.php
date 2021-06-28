@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,13 +16,13 @@ class ExistenciaLotes extends Model
    * Bodega foreign key relationship
    */
   public function storage() {
-    return $this->hasOne('App\Bodegas', 'BODEGA', 'BODEGA');
+    return $this->hasOne('App\Models\Bodegas', 'BODEGA', 'BODEGA');
   }
 
   /**
    * EXIST_LOTE - ARTICULO relationship
    */
   public function articulo() {
-    return $this->hasOne('App\Articulos', 'ARTICULO', 'ARTICULO');
+    return $this->hasOne('App\Models\Articulos', 'ARTICULO', 'ARTICULO');
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,21 +34,21 @@ class Articulos extends Model
    * Existencia_bodega relationship
    */
   public function existenciaBodega() {
-    return $this->hasMany('App\ExistenciaBodegas', 'ARTICULO', 'ARTICULO');
+    return $this->hasMany('App\Models\ExistenciaBodegas', 'ARTICULO', 'ARTICULO');
   }
 
   /**
    * ECISTENCIA_LOTE foreign key relationship
    */
   public function existenciaLote() {
-    return $this->hasMany('App\ExistenciaLotes', 'ARTICULO', 'ARTICULO');
+    return $this->hasMany('App\Models\ExistenciaLotes', 'ARTICULO', 'ARTICULO');
   }
 
   /**
    * Articulos alternos belongsToMany relacion
    */
   public function alternos() {
-    return $this->belongsToMany('App\Articulos', 'SOCOCO.ARTICULO_ALTERNO',
+    return $this->belongsToMany('App\Models\Articulos', 'SOCOCO.ARTICULO_ALTERNO',
       'ARTICULO', 'ALTERNO');
   }
 
@@ -56,7 +56,7 @@ class Articulos extends Model
    * Original/Aftermaker Clasificacion relationship
    */
   public function original() {
-    return $this->hasOne('App\Clasificaciones', 'CLASIFICACION',
+    return $this->hasOne('App\Models\Clasificaciones', 'CLASIFICACION',
       'CLASIFICACION_2');
   }
 
@@ -64,7 +64,7 @@ class Articulos extends Model
    * Transaccion_inv relacion 1:m
    */
   public function transaccionInv() {
-    return $this->hasMany('App\TransaccionInv', 'ARTICULO', 'ARTICULO');
+    return $this->hasMany('App\Models\TransaccionInv', 'ARTICULO', 'ARTICULO');
   }
 
   /**

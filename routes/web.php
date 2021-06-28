@@ -12,11 +12,12 @@
 */
 
 Route::get('/', function () {
-  if (auth()->check()) {
-    return redirect()->route('search');
-  } else {
-    return view('landing');
-  }
+  // if (auth()->check()) {
+  //   return redirect()->route('search');
+  // } else {
+  //   return view('landing');
+  // }
+  return view('search');
 });
 
 /**

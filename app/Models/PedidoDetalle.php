@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +21,6 @@ class PedidoDetalle extends Model
    * Pedido_Detalle - Articulo relationship
    */
   public function articulo() {
-    return $this->hasOne('App\Articulos', 'ARTICULO', 'articulo_id');
+    return $this->hasOne('App\Models\Articulos', 'ARTICULO', 'articulo_id');
   }
 }

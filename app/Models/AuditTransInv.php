@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class AuditTransInv extends Model
    * Transaccion_Inv relacion 1:m
    */
   public function transaccionInv() {
-    return $this->hasMany('App\TransaccionInv',
+    return $this->hasMany('App\Models\TransaccionInv',
       'AUDIT_TRANS_INV', 'AUDIT_TRANS_INV');
   }
 }
