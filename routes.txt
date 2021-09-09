@@ -1,0 +1,40 @@
++--------+----------+------------------------------------+--------------------------------+------------------------------------------------------------------------+------------+
+| Domain | Method   | URI                                | Name                           | Action                                                                 | Middleware |
++--------+----------+------------------------------------+--------------------------------+------------------------------------------------------------------------+------------+
+|        | GET|HEAD | /                                  |                                | Closure                                                                | web        |
+|        | GET|HEAD | api/articulos_custom_barcodesearch | articulos.custom.barcodesearch | App\Http\Controllers\Api\ArticulosController@customSearchWithBarcode   | api        |
+|        | GET|HEAD | api/articulos_custom_search        | articulos.custom.search        | App\Http\Controllers\Api\ArticulosController@customSearch              | api        |
+|        | GET|HEAD | api/outputlines                    | api.outputlines.index          | App\Http\Controllers\Api\OutputsLinesController@index                  | api        |
+|        | POST     | api/outputlines                    | api.outputlines.store          | App\Http\Controllers\Api\OutputsLinesController@store                  | api        |
+|        | DELETE   | api/outputlines                    | api.outputlines.destroy        | App\Http\Controllers\Api\OutputsLinesController@destroy                | api        |
+|        | GET|HEAD | api/outputs                        | api.outputs.index              | App\Http\Controllers\Api\OutputsController@index                       | api        |
+|        | POST     | api/outputs                        | api.outputs.store              | App\Http\Controllers\Api\OutputsController@store                       | api        |
+|        | GET|HEAD | api/outputs/{documento_inv}        | api.outputs.show               | App\Http\Controllers\Api\OutputsController@show                        | api        |
+|        | GET|HEAD | api/user                           |                                | Closure                                                                | api        |
+|        |          |                                    |                                |                                                                        | auth:api   |
+|        | GET|HEAD | home                               | home                           | App\Http\Controllers\HomeController@index                              | web        |
+|        |          |                                    |                                |                                                                        | auth       |
+|        | GET|HEAD | login                              | login                          | App\Http\Controllers\Auth\LoginController@showLoginForm                | web        |
+|        |          |                                    |                                |                                                                        | guest      |
+|        | POST     | login                              |                                | App\Http\Controllers\Auth\LoginController@login                        | web        |
+|        |          |                                    |                                |                                                                        | guest      |
+|        | POST     | logout                             | logout                         | App\Http\Controllers\Auth\LoginController@logout                       | web        |
+|        | GET|HEAD | outputs                            | outputs.index                  | App\Http\Controllers\OutputsController@getOutputs                      | web        |
+|        | POST     | outputs                            | outputs.create                 | App\Http\Controllers\OutputsController@createOutputs                   | web        |
+|        | GET|HEAD | outputs/{documento_inv}            | outputs.show                   | App\Http\Controllers\OutputsController@getOutputsShow                  | web        |
+|        | GET|HEAD | password/confirm                   | password.confirm               | App\Http\Controllers\Auth\ConfirmPasswordController@showConfirmForm    | web        |
+|        |          |                                    |                                |                                                                        | auth       |
+|        | POST     | password/confirm                   |                                | App\Http\Controllers\Auth\ConfirmPasswordController@confirm            | web        |
+|        |          |                                    |                                |                                                                        | auth       |
+|        | POST     | password/email                     | password.email                 | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web        |
+|        | GET|HEAD | password/reset                     | password.request               | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web        |
+|        | POST     | password/reset                     | password.update                | App\Http\Controllers\Auth\ResetPasswordController@reset                | web        |
+|        | GET|HEAD | password/reset/{token}             | password.reset                 | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web        |
+|        | GET|HEAD | register                           | register                       | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web        |
+|        |          |                                    |                                |                                                                        | guest      |
+|        | POST     | register                           |                                | App\Http\Controllers\Auth\RegisterController@register                  | web        |
+|        |          |                                    |                                |                                                                        | guest      |
+|        | GET|HEAD | result                             | result                         | App\Http\Controllers\SearchController@result                           | web        |
+|        | POST     | rotation                           | article.rotation               | App\Http\Controllers\SearchController@rotation                         | web        |
+|        | GET|HEAD | search                             | search                         | App\Http\Controllers\SearchController@search                           | web        |
++--------+----------+------------------------------------+--------------------------------+------------------------------------------------------------------------+------------+

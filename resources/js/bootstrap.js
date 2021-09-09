@@ -19,7 +19,41 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+
 window.axios = require('axios');
+import store from './store/index';
+
+window.axios.interceptors.request.use(config => {
+    // set load on
+    store.state.load = true
+    // set baseUrl
+    config.baseURL = 'http://localhost:8000/api'
+    config.headers = {
+        'Accept': 'application/json'
+    }
+
+    return config
+});
+
+window.axios.interceptors.response.use(response => {
+    // set load off
+    store.state.load = false
+    return response
+}, error => {
+    // set load off
+    store.state.load = false
+    if (error.response !== null) {
+        if (error.response.status === 422) {
+            store.state.errors = error.response.data.errors
+        }
+
+        if (error.response.status === 404) {
+            alert(error.response.data)
+        }
+    }
+
+    return Promise.reject(error)    
+});
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

@@ -46,12 +46,13 @@ class LoginController extends Controller
     $input = $request->all();
 
     $this->validate($request, [
-      'username' => 'required',
+      'email' => 'required',
       'password' => 'required',
     ]);
 
-    $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-    if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+    // $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    $fieldType = 'email';
+    if(auth()->attempt(array($fieldType => $input['email'], 'password' => $input['password'])))
     {
         return redirect()->route('search');
     } else {

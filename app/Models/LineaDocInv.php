@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ExistenciaBodegas extends Model
+class LineaDocInv extends Model
 {
   protected $connection = 'sqlsrv';
-  protected $table = 'SOCOCO.EXISTENCIA_BODEGA';
-  protected $keyType = 'string';
+  protected $table = 'SOCOCO.LINEA_DOC_INV';
   public $incrementing = false;
+  public $timestamps = false;
 }

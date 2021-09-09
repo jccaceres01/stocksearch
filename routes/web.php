@@ -21,30 +21,26 @@ Route::get('/', function () {
 });
 
 /**
+ * Auth routes
+ */
+Auth::routes();
+
+/**
+ * Routes for stock outputs
+ * 
+ */
+Route::get('outputs', 'OutputsController@getOutputs')
+  ->name('outputs.index'); // Get outputs
+Route::get('outputs/{documento_inv}', 'OutputsController@getOutputsShow')
+  ->name('outputs.show'); // Get outputs by documento_inv
+Route::post('outputs', 'OutputsController@createOutputs')
+  ->name('outputs.create');
+
+/**
  * Search and Results Routes
  */
 Route::get('search', 'SearchController@search')->name('search');
 Route::get('result', 'SearchController@result')->name('result');
 Route::post('rotation', 'SearchController@rotation')->name('article.rotation');
 
-/**
- * Auth routes
- */
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-/**
- * Resources Routes
- */
-
- // Carrito Routes
-Route::resource('carrito', 'CarritoController');
-// Pedidos Routes
-Route::resource('pedidos', 'PedidoController');
-
-
-/**
- * JSON sources returns
- */
-Route::get('json/pedidos/{pedido_id}', 'JsonDatasourceController@pedidosJson');

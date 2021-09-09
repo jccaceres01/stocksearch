@@ -22,25 +22,9 @@ class UsersTableSeeder extends Seeder
     // My test user
     User::create([
       'name' => 'Julio Caceres',
-      'email' => 'jcesar01@hotmail.es',
-      'username' => 'jccaceres01',
+      'email' => 'jcaceres@socococr.com',
       'password' => \Hash::make('Password1'),
-      'api_token' => Str::random(80),
       'remember_token' => Str::random(32)
     ]);
-
-    // More Test user
-    for ($i=0; $i < rand(3, 10); $i++) {
-
-      User::create([
-        'name' => $faker->name,
-        'email' => 'user'.$i.'@mail.com',
-        'username' => 'user'.$i,
-        'password' => \Hash::make('Password1'),
-        'api_token' => Str::random(80),
-        'remember_token' => Str::random(32)
-      ]);
-
-    }
   }
 }

@@ -108,52 +108,28 @@
                   <div class="row">
                     <div class="col-sm-12">
 
-                       <table class="table table-striped table-bordered table-hover">
-                         <thead>
-                           <tr>
-                             <td><strong>Bodega</strong></td>
-                             <td><strong>Localización</strong></td>
-                             <td><strong>Disponible</strong></td>
-                             <td><strong>Reservada</strong></td>
-                             <td><strong><i class="fas fa-cart"></i> Añadir al Carrito</strong></td>
-                           </tr>
-                         </thead>
-                         <tbody>
-                           @if(!empty($art->existenciaLote))
-                           @foreach($art->existenciaLote as $el)
-                           <tr>
-                             <td>{{ $el->BODEGA }} ({{ $el->storage->NOMBRE }})</td>
-                             <td>{{ $el->LOCALIZACION }}</td>
-                             <td>{{ $el->CANT_DISPONIBLE }}</td>
-                             <td>{{ $el->CANT_RESERVADA }}</td>
-                             <td>
-                               <form class="form d-inline" action="{{ route('carrito.store') }}" method="post">
-                                 <div class="row">
-                                   <div class="col-sm-6">
-                                     @csrf
-
-                                     <!-- Hidden info for each form -->
-                                     <input type="hidden" name="articulo_id" value="{{ $art->ARTICULO }}">
-                                     <input type="hidden" name="bodega_id" value="{{ $el->BODEGA }}">
-                                     <input type="hidden" name="localizacion" value="{{ $el->LOCALIZACION }}">
-                                     <input type="hidden" name="original" value="{{ ($art->CLASIFICACION_2 == '02-01') ? 1 : 0 }}">
-
-                                    <input type="number" steps="0.1" max="{{ $el->CANT_DISPONIBLE }}" min="1" class="d-inline form-control form-control-sm" name="cantidad" required>
-                                   </div>
-                                   <div class="col-sm-6">
-                                     <div class="btn-group" role="group">
-                                       <button type="reset" class="btn btn-secondary btn-sm" title="Limpiar"><i class="fas fa-retweet"></i> </button>
-                                       <button type="submit" class=" d-inline btn btn-secondary btn-sm" title="Añadir al carrito"><i class="fas fa-shopping-cart"></i> </button>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </form>
-                             </td>
-                           </tr>
-                           @endforeach
-                           @endif
-                         </tbody>
-                       </table>
+                      <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <td><strong>Bodega</strong></td>
+                            <td><strong>Localización</strong></td>
+                            <td><strong>Disponible</strong></td>
+                            <td><strong>Reservada</strong></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        @if(!empty($art->existenciaLote))
+                          @foreach($art->existenciaLote as $el)
+                          <tr>
+                            <td>{{ $el->BODEGA }} ({{ $el->storage->NOMBRE }})</td>
+                            <td>{{ $el->LOCALIZACION }}</td>
+                            <td>{{ $el->CANT_DISPONIBLE }}</td>
+                            <td>{{ $el->CANT_RESERVADA }}</td>
+                          </tr>
+                          @endforeach
+                          @endif
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>

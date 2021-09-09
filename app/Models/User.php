@@ -50,4 +50,12 @@ class User extends Authenticatable
   public function pedidos() {
     return $this->hasMany('App\Models\Pedido');
   }
+
+  /**
+   * Get ERPADMIN Softland User
+   */
+  public function softlandUser() {
+    return $this->hasOne('App\Models\SoflandUsers',
+      'CORREO_ELECTRONICO', 'email');
+  }
 }
