@@ -58912,7 +58912,7 @@ window.axios.interceptors.request.use(function (config) {
   // set load on
   _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].state.load = true; // set baseUrl
 
-  config.baseURL = 'http://localhost:8000/api';
+  config.baseURL = "http://localhost:8000";
   config.headers = {
     'Accept': 'application/json'
   };

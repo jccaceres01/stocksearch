@@ -27,7 +27,7 @@ window.axios.interceptors.request.use(config => {
     // set load on
     store.state.load = true
     // set baseUrl
-    config.baseURL = 'http://localhost:8000/api'
+    config.baseURL = process.env.MIX_API_URL
     config.headers = {
         'Accept': 'application/json'
     }
