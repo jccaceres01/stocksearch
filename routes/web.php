@@ -43,4 +43,12 @@ Route::get('search', 'SearchController@search')->name('search');
 Route::get('result', 'SearchController@result')->name('result');
 Route::post('rotation', 'SearchController@rotation')->name('article.rotation');
 
+/**
+ * Home
+ */
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * Print Reports
+ */
+Route::post('/reports', 'ReportsController@printReport')->name('reports');

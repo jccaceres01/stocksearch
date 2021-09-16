@@ -6,8 +6,18 @@
         <h3>Salida ({{ output.DOCUMENTO_INV }})</h3>
       </div>
       <div class="col-sm-6">
+        <!-- Print Report Button -->
+        <form action="/reports" method="POST" class="d-inline float-right mx-2" target="_blank">
+          <input type="hidden" name="_token" :value="csrf">
+          <input type="hidden" name="report" value="/reports/StockSearch/outputs/output/output">
+          <input type="hidden" name="documento_inv" :value="output.DOCUMENTO_INV">
+          <input type="hidden" name="softland_user" :value="softland_user">
+          <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="fas fa-print"></i></button>
+        </form>
+
         <button type="button" class="btn btn-outline-secondary btn-sm float-right" v-if="!isLock" @click="toggleApprove('approve')"><i class="fas fa-check"></i> Aprobar</button>
         <button type="button" class="btn btn-outline-secondary btn-sm float-right" v-else @click="toggleApprove('disapprove')"><i class="fas fa-ban"></i> Desaprobar</button>
+        
       </div>
     </div>
     <hr>
@@ -57,11 +67,18 @@
 <script>
 export default {
   /**
+   * Vue cycle functions
+   */
+  created() {
+    
+  },
+  /**
    * Data
    */
   data() {
     return {
-
+      csrf: document.querySelector('meta[name=_token]') ?
+        document.querySelector('meta[name=_token]').content : null
     }
   },
   /**
@@ -97,6 +114,10 @@ export default {
           console.log(error)
         }
       }
+    },
+    // Print Output
+    printOutput() {
+      
     }
   }
 }

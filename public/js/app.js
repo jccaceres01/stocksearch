@@ -2249,12 +2249,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Vue cycle functions
+   */
+  created: function created() {},
+
   /**
    * Data
    */
   data: function data() {
-    return {};
+    return {
+      csrf: document.querySelector('meta[name=_token]') ? document.querySelector('meta[name=_token]').content : null
+    };
   },
 
   /**
@@ -2322,7 +2339,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[1, 8]]);
       }))();
-    }
+    },
+    // Print Output
+    printOutput: function printOutput() {}
   }
 });
 
@@ -43852,6 +43871,40 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-6" }, [
+        _c(
+          "form",
+          {
+            staticClass: "d-inline float-right mx-2",
+            attrs: { action: "/reports", method: "POST", target: "_blank" }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "hidden",
+                name: "report",
+                value: "/reports/StockSearch/outputs/output/output"
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "documento_inv" },
+              domProps: { value: _vm.output.DOCUMENTO_INV }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "softland_user" },
+              domProps: { value: _vm.softland_user }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        ),
+        _vm._v(" "),
         !_vm.isLock
           ? _c(
               "button",
@@ -43892,19 +43945,19 @@ var render = function() {
           _c("table", [
             _c("tbody", [
               _c("tr", [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.DOCUMENTO_INV))])
               ]),
               _vm._v(" "),
               _c("tr", [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.FECHA_DOCUMENTO))])
               ]),
               _vm._v(" "),
               _c("tr", [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.REFERENCIA))])
               ])
@@ -43916,19 +43969,19 @@ var render = function() {
           _c("table", [
             _c("tbody", [
               _c("tr", [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.USUARIO))])
               ]),
               _vm._v(" "),
               _c("tr", [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.USUARIO_APRO))])
               ]),
               _vm._v(" "),
               _c("tr", [
-                _vm._m(5),
+                _vm._m(6),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.output.FECHA_HORA_APROB))])
               ])
@@ -43950,6 +44003,19 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-secondary btn-sm",
+        attrs: { type: "submit" }
+      },
+      [_c("i", { staticClass: "fas fa-print" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -58912,7 +58978,7 @@ window.axios.interceptors.request.use(function (config) {
   // set load on
   _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].state.load = true; // set baseUrl
 
-  config.baseURL = "http://localhost:8000";
+  config.baseURL = "http://localhost:8000/api";
   config.headers = {
     'Accept': 'application/json'
   };
